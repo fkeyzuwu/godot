@@ -344,6 +344,10 @@ void EditorPropertyArray::_create_new_property_slot() {
 	slot.reorder_button = reorder_button;
 	slot.set_index(idx + page_index * page_length);
 	slots.push_back(slot);
+
+	if (unfolded_slots.has(idx)) {
+		prop->get_edited_object()->editor_set_section_unfold(prop->get_edited_property(), true);
+	}
 }
 
 void EditorPropertyArray::set_preview_value(bool p_preview_value) {
@@ -523,6 +527,16 @@ void EditorPropertyArray::update_property() {
 				changing_type_index = EditorPropertyArrayObject::NOT_CHANGING_TYPE;
 			}
 			slot.prop->update_property();
+
+			// if (slot.prop->editor_is_section_unfolded(slot.prop->get_edited_property())) {
+			// 	if (!unfolded_slots.has(idx)) {
+			// 		unfolded_slots.insert(idx);
+			// 	}
+			// } else {
+			// 	if (unfolded_slots.has(idx)) {
+			// 		unfolded_slots.erase(idx);
+			// 	}
+			// }
 		}
 
 		updating = false;

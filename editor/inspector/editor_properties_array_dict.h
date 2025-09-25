@@ -126,6 +126,7 @@ class EditorPropertyArray : public EditorProperty {
 	PropertyHint subtype_hint;
 	String subtype_hint_string;
 	LocalVector<Slot> slots;
+	HashSet<int> unfolded_slots;
 
 	Slot reorder_slot;
 	int reorder_to_index = -1;
